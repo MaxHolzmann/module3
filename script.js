@@ -24,15 +24,16 @@ let passwordText = document.querySelector("#password");
 const writePassword = () => {
 
   let chars = "";
+  let password = "";
 
-  // let passwordLength = prompt("How many chars?");
+  let passwordLength = prompt("How many chars?");
 
-  // for (passwordLength; passwordLength > 128 || passwordLength < 8;) {
-  //   console.log('No way, it logged');
-  //   passwordLength = prompt('Please enter an number between 8 and 120.');
-  // }
+  for (passwordLength; passwordLength > 128 || passwordLength < 8;) {
+    console.log('No way, it logged');
+    passwordLength = prompt('Please enter an number between 8 and 120.');
+  }
   
-  // console.log(passwordLength)
+  console.log(passwordLength)
 
   //add an if all false type beat
 
@@ -66,13 +67,20 @@ const writePassword = () => {
 
   console.log(chars);
 
+  const generatePassword = () => {
+  for(let i = 0; i <= passwordLength; i++) {
+    let randomNum = Math.floor(Math.random() * chars.length);
+    password += chars.substring(randomNum, randomNum + 1);
+  }
+}
+
+  generatePassword();
+
+  // Check for password
 
 
 
-  
-
-  
-
+  console.log(password);
 
 }
 
