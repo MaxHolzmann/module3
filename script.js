@@ -30,16 +30,16 @@ const writePassword = () => {
   let specialChars = confirm("Would you like special characters?");
 
   // Add potential characters based on user's reponse
-  if(lowerCase == true) {
+  if(lowerCase) {
     chars += "abcdefghijklmnopqrstuvwxyz";
   }
-  if(upperCase == true) {
+  if(upperCase) {
     chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   }
-  if(numeric == true) {
+  if(numeric) {
     chars += "0123456789";
   }
-  if(specialChars == true) {
+  if(specialChars) {
     chars += " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
   }
 
