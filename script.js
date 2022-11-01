@@ -24,12 +24,18 @@ let passwordText = document.querySelector("#password");
 const writePassword = () => {
 
   let chars = "";
+
+  const lowerCaseChars = /[abcdefghijklmnopqrstuvwxyz]/;
+  const upperCaseChars = /[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/;
+  const numericChars = /[0123456789]/;
+  const specialCharsString = /[!]/;
+
+  let passGen = "";
   let password = "";
 
   let passwordLength = prompt("How many chars?");
 
   for (passwordLength; passwordLength > 128 || passwordLength < 8;) {
-    console.log('No way, it logged');
     passwordLength = prompt('Please enter an number between 8 and 120.');
   }
   
@@ -68,20 +74,39 @@ const writePassword = () => {
   console.log(chars);
 
   const generatePassword = () => {
+  password = "";
+
   for(let i = 0; i <= passwordLength; i++) {
     let randomNum = Math.floor(Math.random() * chars.length);
     password += chars.substring(randomNum, randomNum + 1);
   }
-}
-
-  generatePassword();
-
-  // Check for password
-
-
 
   console.log(password);
 
+  if(lowerCase && !lowerCaseChars.test(password)) {
+    console.log('password criteria not met: lowercase');
+    generatePassword();
+  }
+
+  if(upperCase && !upperCaseChars.test(password)) {
+    console.log('password criteria not met: uppercase');
+    generatePassword();
+  }
+
+  if(numeric && !numericChars.test(password)) {
+    console.log('password criteria not met: numeric');
+    generatePassword();
+  }
+
+  if(specialChars && !specialCharsString.test(password)) {
+    console.log('password criteria not met: special');
+    generatePassword();
+  }
+
+  return password;
+
+}
+  passwordText.value = generatePassword();
 }
 
 // Add event listener to generate button
