@@ -23,6 +23,8 @@ let passwordText = document.querySelector("#password");
 // Write password to the #password input
 const writePassword = () => {
 
+  let chars = "";
+
   // let passwordLength = prompt("How many chars?");
 
   // for (passwordLength; passwordLength > 128 || passwordLength < 8;) {
@@ -45,6 +47,27 @@ const writePassword = () => {
 
   let specialChars = confirm("Would you like special characters?");
   console.log(specialChars);
+
+  if(lowerCase == true) {
+    chars += "abcdefghijklmnopqrstuvwxyz";
+  }
+
+  if(upperCase == true) {
+    chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  }
+
+  if(numeric == true) {
+    chars += "0123456789";
+  }
+
+  if(specialChars == true) {
+    chars += "!";
+  }
+
+  console.log(chars);
+
+
+
 
   
 
