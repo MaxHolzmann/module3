@@ -1,116 +1,81 @@
-// Acceptance Criteria
-// GIVEN I need a new, secure password
-// WHEN I click the button to generate a password
-// THEN I am presented with a series of prompts for password criteria
-// WHEN prompted for password criteria
-// THEN I select which criteria to include in the password
-// WHEN prompted for the length of the password
-// THEN I choose a length of at least 8 characters and no more than 128 characters
-// WHEN asked for character types to include in the password
-// THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
-// WHEN I answer each prompt
-// THEN my input should be validated and at least one character type should be selected
-// WHEN all prompts are answered
-// THEN a password is generated that matches the selected criteria
-// WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
-
-
 // Assignment Code
+
+// DOM variables
 const generateBtn = document.querySelector("#generate");
 let passwordText = document.querySelector("#password");
 const copyBtn = document.querySelector("#copy");
 
-// Write password to the #password input
+// Write password to the #password element
 const writePassword = () => {
 
   let chars = "";
+  let password = "";
 
+  // Potential characters for password generation
   const lowerCaseChars = /[abcdefghijklmnopqrstuvwxyz]/;
   const upperCaseChars = /[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/;
   const numericChars = /[0123456789]/;
-  const specialCharsString = /[!]/;
-
-  let passGen = "";
-  let password = "";
-
-  let passwordLength = prompt("How many chars?");
-
+  const specialCharsString = /[ !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
+  
+  // Password length prompt & check
+  let passwordLength = prompt("How many characters would you like in your password?\nBetween 8 and 128 characters");
   for (passwordLength; passwordLength > 128 || passwordLength < 8;) {
-    passwordLength = prompt('Please enter an number between 8 and 120.');
+    passwordLength = prompt('Please enter an number between 8 and 128.');
   }
   
-  console.log(passwordLength)
-
-  //add an if all false type beat
-
+  // Additional criteria
   let lowerCase = confirm("Would you like lowercase letters?");
-  console.log(lowerCase);
-
   let upperCase = confirm("Would you like uppercase letters?");
-  console.log(upperCase);
-
   let numeric = confirm("Would you like numbers?");
-  console.log(numeric);
-
   let specialChars = confirm("Would you like special characters?");
-  console.log(specialChars);
 
+  // Add potential characters based on user's reponse
   if(lowerCase == true) {
     chars += "abcdefghijklmnopqrstuvwxyz";
   }
-
   if(upperCase == true) {
     chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   }
-
   if(numeric == true) {
     chars += "0123456789";
   }
-
   if(specialChars == true) {
-    chars += "!";
+    chars += " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
   }
 
-  console.log(chars);
-
+  // Password generation
   const generatePassword = () => {
-  password = "";
+  password = ""; 
 
   for(let i = 0; i <= passwordLength; i++) {
     let randomNum = Math.floor(Math.random() * chars.length);
     password += chars.substring(randomNum, randomNum + 1);
   }
 
-  console.log(password);
-
+  // Checks password for meeting criteria
   if(lowerCase && !lowerCaseChars.test(password)) {
-    console.log('password criteria not met: lowercase');
     generatePassword();
   }
 
   if(upperCase && !upperCaseChars.test(password)) {
-    console.log('password criteria not met: uppercase');
     generatePassword();
   }
 
   if(numeric && !numericChars.test(password)) {
-    console.log('password criteria not met: numeric');
     generatePassword();
   }
 
   if(specialChars && !specialCharsString.test(password)) {
-    console.log('password criteria not met: special');
     generatePassword();
   }
-
   return password;
-
 }
+  // Display generated password & displays hidden copy button
   passwordText.value = generatePassword();
   copyBtn.classList.remove('copy-btn');
 }
 
+// Functionality for the copy button
 const copyPassword = () => {
   let pass = document.getElementById("password").value;
   navigator.clipboard.writeText(pass);
