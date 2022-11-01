@@ -88,6 +88,10 @@ header {
   cursor: pointer;
 }
 
+.copy-btn {
+  display: none;
+}
+
 button[disabled] {
   cursor: default;
   background: #c0c7cf;
@@ -115,7 +119,7 @@ button[disabled] {
   border: 2px dashed #c0c7cf;
   border-radius: 6px;
   resize: none;
-  overflow: hidden;
+  overflow: hidden;         
 }
 
 @media (max-width: 690px) {

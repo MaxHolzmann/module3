@@ -17,8 +17,9 @@
 
 
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
+const generateBtn = document.querySelector("#generate");
 let passwordText = document.querySelector("#password");
+const copyBtn = document.querySelector("#copy");
 
 // Write password to the #password input
 const writePassword = () => {
@@ -107,7 +108,20 @@ const writePassword = () => {
 
 }
   passwordText.value = generatePassword();
+  copyBtn.classList.remove('copy-btn');
+}
+
+const copyPassword = () => {
+  let pass = document.getElementById("password").value;
+  navigator.clipboard.writeText(pass);
+  copyBtn.textContent = "Copied!";
+
+  setTimeout(() => {
+    copyBtn.textContent = "Copy Password";
+  }, 2000);
+
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+copyBtn.addEventListener("click", copyPassword)
